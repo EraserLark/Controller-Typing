@@ -198,6 +198,30 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""NorthButtonMenu"",
+                    ""type"": ""Button"",
+                    ""id"": ""1765ed1f-5ae2-4775-b91c-b57db91cbb61"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""SouthButtonMenu"",
+                    ""type"": ""Button"",
+                    ""id"": ""1b499c2c-bf1d-4722-b2dc-6864514a3fb6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""WestButtonMenu"",
+                    ""type"": ""Button"",
+                    ""id"": ""42eb162d-b81f-45e6-81e0-decf35c1a5d0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -226,7 +250,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""823911ef-172c-4594-a8bf-8169f25a0495"",
-                    ""path"": ""<Keyboard>/leftShift"",
+                    ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad Test"",
@@ -288,6 +312,39 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e81e6df8-33ce-436e-ba12-85ebe7cc2b1b"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad Test"",
+                    ""action"": ""NorthButtonMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""991b7dd6-9c36-4964-abd9-f6079d9c8ff9"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad Test"",
+                    ""action"": ""SouthButtonMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2818739d-14e3-4d55-9bf3-c872f449526c"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad Test"",
+                    ""action"": ""WestButtonMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -339,6 +396,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_Typing_Keyboard_Confirm = m_Typing_Keyboard.FindAction("Confirm", throwIfNotFound: true);
         m_Typing_Keyboard_Backspace = m_Typing_Keyboard.FindAction("Backspace", throwIfNotFound: true);
         m_Typing_Keyboard_EastButtonMenu = m_Typing_Keyboard.FindAction("EastButtonMenu", throwIfNotFound: true);
+        m_Typing_Keyboard_NorthButtonMenu = m_Typing_Keyboard.FindAction("NorthButtonMenu", throwIfNotFound: true);
+        m_Typing_Keyboard_SouthButtonMenu = m_Typing_Keyboard.FindAction("SouthButtonMenu", throwIfNotFound: true);
+        m_Typing_Keyboard_WestButtonMenu = m_Typing_Keyboard.FindAction("WestButtonMenu", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -498,6 +558,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_Typing_Keyboard_Confirm;
     private readonly InputAction m_Typing_Keyboard_Backspace;
     private readonly InputAction m_Typing_Keyboard_EastButtonMenu;
+    private readonly InputAction m_Typing_Keyboard_NorthButtonMenu;
+    private readonly InputAction m_Typing_Keyboard_SouthButtonMenu;
+    private readonly InputAction m_Typing_Keyboard_WestButtonMenu;
     public struct Typing_KeyboardActions
     {
         private @PlayerControls m_Wrapper;
@@ -506,6 +569,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public InputAction @Confirm => m_Wrapper.m_Typing_Keyboard_Confirm;
         public InputAction @Backspace => m_Wrapper.m_Typing_Keyboard_Backspace;
         public InputAction @EastButtonMenu => m_Wrapper.m_Typing_Keyboard_EastButtonMenu;
+        public InputAction @NorthButtonMenu => m_Wrapper.m_Typing_Keyboard_NorthButtonMenu;
+        public InputAction @SouthButtonMenu => m_Wrapper.m_Typing_Keyboard_SouthButtonMenu;
+        public InputAction @WestButtonMenu => m_Wrapper.m_Typing_Keyboard_WestButtonMenu;
         public InputActionMap Get() { return m_Wrapper.m_Typing_Keyboard; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -527,6 +593,15 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @EastButtonMenu.started -= m_Wrapper.m_Typing_KeyboardActionsCallbackInterface.OnEastButtonMenu;
                 @EastButtonMenu.performed -= m_Wrapper.m_Typing_KeyboardActionsCallbackInterface.OnEastButtonMenu;
                 @EastButtonMenu.canceled -= m_Wrapper.m_Typing_KeyboardActionsCallbackInterface.OnEastButtonMenu;
+                @NorthButtonMenu.started -= m_Wrapper.m_Typing_KeyboardActionsCallbackInterface.OnNorthButtonMenu;
+                @NorthButtonMenu.performed -= m_Wrapper.m_Typing_KeyboardActionsCallbackInterface.OnNorthButtonMenu;
+                @NorthButtonMenu.canceled -= m_Wrapper.m_Typing_KeyboardActionsCallbackInterface.OnNorthButtonMenu;
+                @SouthButtonMenu.started -= m_Wrapper.m_Typing_KeyboardActionsCallbackInterface.OnSouthButtonMenu;
+                @SouthButtonMenu.performed -= m_Wrapper.m_Typing_KeyboardActionsCallbackInterface.OnSouthButtonMenu;
+                @SouthButtonMenu.canceled -= m_Wrapper.m_Typing_KeyboardActionsCallbackInterface.OnSouthButtonMenu;
+                @WestButtonMenu.started -= m_Wrapper.m_Typing_KeyboardActionsCallbackInterface.OnWestButtonMenu;
+                @WestButtonMenu.performed -= m_Wrapper.m_Typing_KeyboardActionsCallbackInterface.OnWestButtonMenu;
+                @WestButtonMenu.canceled -= m_Wrapper.m_Typing_KeyboardActionsCallbackInterface.OnWestButtonMenu;
             }
             m_Wrapper.m_Typing_KeyboardActionsCallbackInterface = instance;
             if (instance != null)
@@ -543,6 +618,15 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @EastButtonMenu.started += instance.OnEastButtonMenu;
                 @EastButtonMenu.performed += instance.OnEastButtonMenu;
                 @EastButtonMenu.canceled += instance.OnEastButtonMenu;
+                @NorthButtonMenu.started += instance.OnNorthButtonMenu;
+                @NorthButtonMenu.performed += instance.OnNorthButtonMenu;
+                @NorthButtonMenu.canceled += instance.OnNorthButtonMenu;
+                @SouthButtonMenu.started += instance.OnSouthButtonMenu;
+                @SouthButtonMenu.performed += instance.OnSouthButtonMenu;
+                @SouthButtonMenu.canceled += instance.OnSouthButtonMenu;
+                @WestButtonMenu.started += instance.OnWestButtonMenu;
+                @WestButtonMenu.performed += instance.OnWestButtonMenu;
+                @WestButtonMenu.canceled += instance.OnWestButtonMenu;
             }
         }
     }
@@ -584,5 +668,8 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnConfirm(InputAction.CallbackContext context);
         void OnBackspace(InputAction.CallbackContext context);
         void OnEastButtonMenu(InputAction.CallbackContext context);
+        void OnNorthButtonMenu(InputAction.CallbackContext context);
+        void OnSouthButtonMenu(InputAction.CallbackContext context);
+        void OnWestButtonMenu(InputAction.CallbackContext context);
     }
 }

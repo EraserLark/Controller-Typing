@@ -1,14 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class ScreenKeys : MonoBehaviour
 {
     GameObject[,] keyBoxes = new GameObject[3,3];
+    Transform[] keyLetters = new Transform[9];
 
     private void Awake()
     {
+        keyLetters[0] = transform.GetChild(0);
+        
+
         int i = 0;
         for(int row = 0; row <= 2; row++)
         {
@@ -19,6 +21,18 @@ public class ScreenKeys : MonoBehaviour
                 //print("Obj:" + transform.GetChild(i).gameObject + " Row:" + row + " Col:" + col);
             }
         }
+    }
+
+    public void SetKeyLetters(string letters)
+    {
+        print(keyLetters[0]);
+        //print(transform.GetChild(1).gameObject);
+        /*
+        for(int i = 0; i <= 9; i++)
+        {
+            keyLetters[i].text = letters[i].ToString();
+        }
+        */
     }
 
     public void highlightKey(Vector2 keyToLight)

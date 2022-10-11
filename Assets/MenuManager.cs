@@ -4,32 +4,44 @@ using UnityEngine.InputSystem;
 public class MenuManager : MonoBehaviour
 {
     GameObject typingMenu;
-    GameObject screenKeys;
+    ScreenKeys screenKeys;
+    BasicTextbox basicTextbox;
 
     InputManager inputMan = new InputManager();
     Vector2 selectCoords = Vector2.one;
 
+    //Letters
+    string northChars = "ABCD EFGH"; //North(X)
+    char[] eastChars = { 'I', 'J', 'K', 'L', ' ', 'M', 'N', 'O', 'P' }; //East(A)
+    char[] southChars = { 'Q', 'R', 'S', 'T', ' ', 'U', 'V', 'W', 'X' }; //South(B)
+    char[] westChars = { 'Y', 'Z', '.', '!', ' ', '?', ',', '+', '-' }; //West(Y)
+    char[][] currentLetters = new char[4][];
+
     private void Awake()
     {
         typingMenu = GameObject.Find("TypingMenu");
-        screenKeys = GameObject.Find("ScreenKeys");
+        screenKeys = GameObject.Find("ScreenKeys").GetComponent<ScreenKeys>();
+        basicTextbox = GameObject.Find("BasicTextbox").GetComponent<BasicTextbox>();
+
         openMenu(false);
     }
 
     public void openMenu(bool state)
     {
         typingMenu.SetActive(state);
+        screenKeys.SetKeyLetters(northChars);
     }
 
     public void navigateMenu(Vector2 move)
     {
         selectCoords = QuantizeAxis(move);
-        screenKeys.GetComponent<ScreenKeys>().highlightKey(selectCoords);
+        screenKeys.highlightKey(selectCoords);
     }
 
     public void SelectLetter()
     {
-        print(selectCoords);
+        int charToPrint = (int)((selectCoords.x * 3) + selectCoords.y); //Format for 1D array
+        basicTextbox.addLetter(northChars[charToPrint]);
     }
 
     //Will give 8 directional movement
@@ -53,7 +65,7 @@ public class MenuManager : MonoBehaviour
             input.y = 1;
         }
 
-        //Adjust for array (flip x and y, other adjustments)
+        //Adjust for 2D array (flip x and y, other adjustments)
         float temp = input.x;
         input.x = (input.y * -1) + 1;
         input.y = (temp + 1);
