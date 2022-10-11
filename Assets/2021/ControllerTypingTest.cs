@@ -48,17 +48,6 @@ public class ControllerTypingTest : MonoBehaviour
         typeControls.Typing_Gamepad.Move.performed += ctx => move = ctx.ReadValue<Vector2>();
         typeControls.Typing_Gamepad.Move.canceled += ctx => move = Vector2.zero;
 
-        /*
-        buttonCoords[0] = new Vector2(-1, 1);       //Top Left      (NW)
-        buttonCoords[1] = new Vector2(0, 1);        //Top Middle    (N)
-        buttonCoords[2] = new Vector2(1, 1);        //Top Right     (NE)
-        buttonCoords[3] = new Vector2(-1, 0);       //Middle Left   (W)
-        buttonCoords[4] = new Vector2(1, 0);        //Middle Right  (E)
-        buttonCoords[5] = new Vector2(-1, -1);      //Bottom Left   (SW)
-        buttonCoords[6] = new Vector2(0, -1);       //Bottom Middle (S)
-        buttonCoords[7] = new Vector2(1, -1);       //Bottom Right  (SE)
-        */
-
         //Gets the child of each corresponding button in the typing menu    //DEBUG
         buttonCoords2[0, 0] = typingMenu.transform.GetChild(0);             //"NW";
         buttonCoords2[0, 1] = typingMenu.transform.GetChild(1);             //"N";

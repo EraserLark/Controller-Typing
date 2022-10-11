@@ -7,17 +7,16 @@ using UnityEngine.InputSystem;
 public class InputManager : MonoBehaviour
 {
     public static PlayerControls typeControls;
-    //public static event Action<InputActionMap> actionMapChange;
+    MenuManager menu;
 
     public bool useGamepad = false;
     private InputActionMap currentMap;
 
-    public event EventHandler<InputAction> inputDetected;   //Creating signal, parameters
-
     void Awake()
     {
         typeControls = new PlayerControls();
-        
+        menu = GameObject.Find("MenuManager").GetComponent<MenuManager>();
+
         SetUpActions();
 
         if (useGamepad)
@@ -34,10 +33,12 @@ public class InputManager : MonoBehaviour
 
     void SetUpActions()
     {
-        typeControls.Typing_Keyboard.Move.performed += ctx => TestInput();
-        typeControls.Typing_Keyboard.Confirm.performed += ctx => TestInput();
+        typeControls.Typing_Keyboard.Move.performed += ctx => menu.navigateMenu(ctx.ReadValue<Vector2>());
+        typeControls.Typing_Keyboard.Move.canceled += ctx => menu.navigateMenu(Vector2.zero);
+        typeControls.Typing_Keyboard.Confirm.performed += ctx => menu.SelectLetter();
         typeControls.Typing_Keyboard.Backspace.performed += ctx => TestInput();
-        typeControls.Typing_Keyboard.EastButtonMenu.performed += ctx => TestInput();
+        typeControls.Typing_Keyboard.EastButtonMenu.started += ctx => menu.openMenu(true);
+        typeControls.Typing_Keyboard.EastButtonMenu.canceled += ctx => menu.openMenu(false);
 
         typeControls.Typing_Gamepad.Move.performed += ctx => TestInput();
         typeControls.Typing_Gamepad.Confirm.performed += ctx => TestInput();
@@ -53,10 +54,5 @@ public class InputManager : MonoBehaviour
     void TestInput()
     {
         print("Input!");
-    }
-
-    public void OnInputDetected(InputAction input)
-    {
-        inputDetected?.Invoke(this, input); //Fire signal
     }
 }
