@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class MenuManager : MonoBehaviour
@@ -10,12 +11,13 @@ public class MenuManager : MonoBehaviour
     InputManager inputMan = new InputManager();
     Vector2 selectCoords = Vector2.one;
 
-    //Letters
+    //Axis Letters
     string northChars = "ABCD EFGH"; //North(X)
     string eastChars =  "IJKL MNOP"; //East(A)
     string southChars = "QRST UVWX"; //South(B)
     string westChars =  "YZ.! ?,+-"; //West(Y)
-    char[][] currentLetters = new char[4][];
+    string[] axisGroups = { "ABCD EFGH", "IJKL MNOP", "QRST UVWX", "YZ.! ?,+-" };
+    string currentGroup;
 
     private void Awake()
     {
@@ -26,13 +28,15 @@ public class MenuManager : MonoBehaviour
 
     private void Start()   //Lets vars initialize before menu is set inactive
     {
-        openMenu(false);
+        openMenu(false, 0);
     }
 
-    public void openMenu(bool state)
+    public void openMenu(bool state, int num)
     {
         typingMenu.SetActive(state);
-        screenKeys.SetKeyLetters(northChars);
+
+        currentGroup = axisGroups[num];
+        screenKeys.SetKeyLetters(currentGroup);
     }
 
     public void navigateMenu(Vector2 move)
@@ -44,7 +48,7 @@ public class MenuManager : MonoBehaviour
     public void SelectLetter()
     {
         int charToPrint = (int)((selectCoords.x * 3) + selectCoords.y); //Format for 1D array
-        basicTextbox.addLetter(northChars[charToPrint]);
+        basicTextbox.addLetter(currentGroup[charToPrint]);
     }
 
     //Will give 8 directional movement
