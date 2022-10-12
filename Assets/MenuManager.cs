@@ -12,9 +12,9 @@ public class MenuManager : MonoBehaviour
 
     //Letters
     string northChars = "ABCD EFGH"; //North(X)
-    char[] eastChars = { 'I', 'J', 'K', 'L', ' ', 'M', 'N', 'O', 'P' }; //East(A)
-    char[] southChars = { 'Q', 'R', 'S', 'T', ' ', 'U', 'V', 'W', 'X' }; //South(B)
-    char[] westChars = { 'Y', 'Z', '.', '!', ' ', '?', ',', '+', '-' }; //West(Y)
+    string eastChars =  "IJKL MNOP"; //East(A)
+    string southChars = "QRST UVWX"; //South(B)
+    string westChars =  "YZ.! ?,+-"; //West(Y)
     char[][] currentLetters = new char[4][];
 
     private void Awake()
@@ -22,7 +22,10 @@ public class MenuManager : MonoBehaviour
         typingMenu = GameObject.Find("TypingMenu");
         screenKeys = GameObject.Find("ScreenKeys").GetComponent<ScreenKeys>();
         basicTextbox = GameObject.Find("BasicTextbox").GetComponent<BasicTextbox>();
+    }
 
+    private void Start()   //Lets vars initialize before menu is set inactive
+    {
         openMenu(false);
     }
 

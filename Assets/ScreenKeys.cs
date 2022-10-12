@@ -4,12 +4,11 @@ using UnityEngine.UI;
 public class ScreenKeys : MonoBehaviour
 {
     GameObject[,] keyBoxes = new GameObject[3,3];
-    Transform[] keyLetters = new Transform[9];
+    public Text[] keyLetters = new Text[9];
 
     private void Awake()
     {
-        keyLetters[0] = transform.GetChild(0);
-        
+        keyLetters = GetComponentsInChildren<Text>();
 
         int i = 0;
         for(int row = 0; row <= 2; row++)
@@ -25,14 +24,13 @@ public class ScreenKeys : MonoBehaviour
 
     public void SetKeyLetters(string letters)
     {
-        print(keyLetters[0]);
-        //print(transform.GetChild(1).gameObject);
-        /*
-        for(int i = 0; i <= 9; i++)
+        //print("Obj " + transform.GetChild(8).gameObject);
+        //print("keyLetters Array: " + keyLetters[8]);
+
+        for (int i = 0; i <= 8; i++)
         {
             keyLetters[i].text = letters[i].ToString();
         }
-        */
     }
 
     public void highlightKey(Vector2 keyToLight)
