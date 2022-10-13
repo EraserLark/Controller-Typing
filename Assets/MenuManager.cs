@@ -47,8 +47,11 @@ public class MenuManager : MonoBehaviour
 
     public void SelectLetter()
     {
-        int charToPrint = (int)((selectCoords.x * 3) + selectCoords.y); //Format for 1D array
-        basicTextbox.addLetter(currentGroup[charToPrint]);
+        if (typingMenu.activeInHierarchy)
+        {
+            int charToPrint = (int)((selectCoords.x * 3) + selectCoords.y); //Format for 1D array
+            basicTextbox.addLetter(currentGroup[charToPrint]);
+        }
     }
 
     //Will give 8 directional movement

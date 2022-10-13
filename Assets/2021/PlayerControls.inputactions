@@ -101,6 +101,38 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "NorthButtonMenu",
+                    "type": "Button",
+                    "id": "ed95f99c-f271-481a-be9b-064811928e47",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "SouthButtonMenu",
+                    "type": "Button",
+                    "id": "77371ca8-83dd-4d57-bebc-22dad94fbebd",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "WestButtonMenu",
+                    "type": "Button",
+                    "id": "8d3b9da3-163c-424d-bb44-2a4c7dc72916",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Submit",
+                    "type": "Button",
+                    "id": "39c8a012-63c0-4b6e-8369-b01bb5155962",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -145,6 +177,50 @@
                     "processors": "",
                     "groups": "Gamepad Test",
                     "action": "EastButtonMenu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "752ba421-04fc-4dcc-892c-ba0bacb561d1",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad Test;Switch Pro Controller",
+                    "action": "NorthButtonMenu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d1ff375e-8311-44ff-92a9-58a3087f2153",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad Test",
+                    "action": "SouthButtonMenu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cebcc831-a9b7-419f-9c7a-d736b215b650",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad Test",
+                    "action": "WestButtonMenu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9b689a21-fbf7-4568-bce5-ad36029110cd",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad Test",
+                    "action": "Submit",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -206,6 +282,14 @@
                     "name": "WestButtonMenu",
                     "type": "Button",
                     "id": "42eb162d-b81f-45e6-81e0-decf35c1a5d0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Submit",
+                    "type": "Button",
+                    "id": "41c9dd2d-045d-45c8-8c2f-2c0bb19c929f",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -330,6 +414,17 @@
                     "processors": "",
                     "groups": "Gamepad Test",
                     "action": "WestButtonMenu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6b0b2a26-f2ec-4db4-b7ef-fa50933ef98b",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad Test",
+                    "action": "Submit",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
