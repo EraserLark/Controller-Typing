@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using System.Collections.Generic;
 using UnityEngine.InputSystem;
 
 public class MenuManager : MonoBehaviour
@@ -7,16 +8,13 @@ public class MenuManager : MonoBehaviour
     GameObject typingMenu;
     ScreenKeys screenKeys;
     BasicTextbox basicTextbox;
+    LetterData letterData;
 
     InputManager inputMan = new InputManager();
     Vector2 selectCoords = Vector2.one;
 
     //Axis Letters
-    string northChars = "ABCD EFGH"; //North(X)
-    string eastChars =  "IJKL MNOP"; //East(A)
-    string southChars = "QRST UVWX"; //South(B)
-    string westChars =  "YZ.! ?,+-"; //West(Y)
-    string[] axisGroups = { "ABCD EFGH", "IJKL MNOP", "QRST UVWX", "YZ.! ?,+-" };
+    LetterGroup currentAxisGroup;
     string currentGroup;
 
     private void Awake()
@@ -24,6 +22,8 @@ public class MenuManager : MonoBehaviour
         typingMenu = GameObject.Find("TypingMenu");
         screenKeys = GameObject.Find("ScreenKeys").GetComponent<ScreenKeys>();
         basicTextbox = GameObject.Find("BasicTextbox").GetComponent<BasicTextbox>();
+        letterData = GameObject.Find("LetterData").GetComponent<LetterData>();
+        currentAxisGroup = letterData.presets[0];
     }
 
     private void Start()   //Lets vars initialize before menu is set inactive
@@ -31,11 +31,16 @@ public class MenuManager : MonoBehaviour
         openMenu(false, 0);
     }
 
+    public void setMenuPreset(List<LetterGroup> presets, int presetNum)
+    {
+        currentAxisGroup = presets[presetNum];
+    }
+
     public void openMenu(bool state, int num)
     {
         typingMenu.SetActive(state);
 
-        currentGroup = axisGroups[num];
+        currentGroup = currentAxisGroup.axisGroup[num];
         screenKeys.SetKeyLetters(currentGroup);
     }
 
