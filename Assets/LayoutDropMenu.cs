@@ -36,6 +36,5 @@ public class LayoutDropMenu : MonoBehaviour
     public void changePreset(Dropdown menu)
     {
         menuManager.setMenuPreset(letterData.presets, menu.value);
-        print(menu.value);
     }
 }

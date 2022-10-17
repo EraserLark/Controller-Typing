@@ -23,12 +23,13 @@ public class MenuManager : MonoBehaviour
         screenKeys = GameObject.Find("ScreenKeys").GetComponent<ScreenKeys>();
         basicTextbox = GameObject.Find("BasicTextbox").GetComponent<BasicTextbox>();
         letterData = GameObject.Find("LetterData").GetComponent<LetterData>();
-        currentAxisGroup = letterData.presets[0];
     }
 
     private void Start()   //Lets vars initialize before menu is set inactive
     {
-        openMenu(false, 0);
+        currentAxisGroup = letterData.presets[0];
+        currentGroup = currentAxisGroup.axisGroup[0];
+        closeMenu(0);
     }
 
     public void setMenuPreset(List<LetterGroup> presets, int presetNum)
@@ -36,12 +37,20 @@ public class MenuManager : MonoBehaviour
         currentAxisGroup = presets[presetNum];
     }
 
-    public void openMenu(bool state, int num)
+    public void openMenu(int num)
     {
-        typingMenu.SetActive(state);
-
         currentGroup = currentAxisGroup.axisGroup[num];
         screenKeys.SetKeyLetters(currentGroup);
+
+        typingMenu.SetActive(true);
+    }
+
+    public void closeMenu(int num)
+    {
+        if(currentGroup == currentAxisGroup.axisGroup[num])
+        {
+            typingMenu.SetActive(false);
+        }
     }
 
     public void navigateMenu(Vector2 move)
@@ -56,6 +65,10 @@ public class MenuManager : MonoBehaviour
         {
             int charToPrint = (int)((selectCoords.x * 3) + selectCoords.y); //Format for 1D array
             basicTextbox.addLetter(currentGroup[charToPrint]);
+        }
+        else    //Allows spaces even when menu is closed
+        {
+            basicTextbox.addLetter(' ');
         }
     }
 

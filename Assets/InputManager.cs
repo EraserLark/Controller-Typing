@@ -86,26 +86,18 @@ public class InputManager : MonoBehaviour
         typeControls.Typing_Keyboard.Submit.performed += ctx => basicTB.submitMessage();
 
 
-        typeControls.Typing_Keyboard.NorthButtonMenu.started += ctx => menu.openMenu(true, (int)AxisButtons.North);
-        typeControls.Typing_Keyboard.NorthButtonMenu.canceled += ctx => menu.openMenu(false, (int)AxisButtons.North);
+        typeControls.Typing_Keyboard.NorthButtonMenu.started += ctx => menu.openMenu((int)AxisButtons.North);
+        typeControls.Typing_Keyboard.NorthButtonMenu.canceled += ctx => menu.closeMenu((int)AxisButtons.North);
 
-        typeControls.Typing_Keyboard.EastButtonMenu.started += ctx => menu.openMenu(true, (int)AxisButtons.East);
-        typeControls.Typing_Keyboard.EastButtonMenu.canceled += ctx => menu.openMenu(false, (int)AxisButtons.East);
+        typeControls.Typing_Keyboard.EastButtonMenu.started += ctx => menu.openMenu((int)AxisButtons.East);
+        typeControls.Typing_Keyboard.EastButtonMenu.canceled += ctx => menu.closeMenu((int)AxisButtons.East);
 
-        typeControls.Typing_Keyboard.SouthButtonMenu.started += ctx => menu.openMenu(true, (int)AxisButtons.South);
-        typeControls.Typing_Keyboard.SouthButtonMenu.canceled += ctx => menu.openMenu(false, (int)AxisButtons.South);
+        typeControls.Typing_Keyboard.SouthButtonMenu.started += ctx => menu.openMenu((int)AxisButtons.South);
+        typeControls.Typing_Keyboard.SouthButtonMenu.canceled += ctx => menu.closeMenu((int)AxisButtons.South);
 
-        typeControls.Typing_Keyboard.WestButtonMenu.started += ctx => menu.openMenu(true, (int)AxisButtons.West);
-        typeControls.Typing_Keyboard.WestButtonMenu.canceled += ctx => menu.openMenu(false, (int)AxisButtons.West);
-        //typeControls.Typing_Keyboard.EastButtonMenu.started += ctx => menu.openMenu(ctx.ReadValue<Single>());
-        //typeControls.Typing_Keyboard.EastButtonMenu.canceled += ctx => menu.openMenu(ctx.ReadValue<Single>());
+        typeControls.Typing_Keyboard.WestButtonMenu.started += ctx => menu.openMenu((int)AxisButtons.West);
+        typeControls.Typing_Keyboard.WestButtonMenu.canceled += ctx => menu.closeMenu((int)AxisButtons.West);
 
-        /*
-        typeControls.Typing_Gamepad.Move.performed += ctx => TestInput();
-        typeControls.Typing_Gamepad.Confirm.performed += ctx => TestInput();
-        typeControls.Typing_Gamepad.Backspace.performed += ctx => TestInput();
-        typeControls.Typing_Gamepad.EastButtonMenu.performed += ctx => TestInput();
-        */
 
         typeControls.Typing_Gamepad.Move.performed += ctx => menu.navigateMenu(ctx.ReadValue<Vector2>());
         typeControls.Typing_Gamepad.Move.canceled += ctx => menu.navigateMenu(Vector2.zero);
@@ -113,17 +105,17 @@ public class InputManager : MonoBehaviour
         typeControls.Typing_Gamepad.Backspace.performed += ctx => basicTB.deleteLetter();
         typeControls.Typing_Gamepad.Submit.performed += ctx => basicTB.submitMessage();
 
-        typeControls.Typing_Gamepad.NorthButtonMenu.started += ctx => menu.openMenu(true, (int)AxisButtons.North);
-        typeControls.Typing_Gamepad.NorthButtonMenu.canceled += ctx => menu.openMenu(false, (int)AxisButtons.North);
+        typeControls.Typing_Gamepad.NorthButtonMenu.started += ctx => menu.openMenu((int)AxisButtons.North);
+        typeControls.Typing_Gamepad.NorthButtonMenu.canceled += ctx => menu.closeMenu((int)AxisButtons.North);
 
-        typeControls.Typing_Gamepad.EastButtonMenu.started += ctx => menu.openMenu(true, (int)AxisButtons.East);
-        typeControls.Typing_Gamepad.EastButtonMenu.canceled += ctx => menu.openMenu(false, (int)AxisButtons.East);
+        typeControls.Typing_Gamepad.EastButtonMenu.started += ctx => menu.openMenu((int)AxisButtons.East);
+        typeControls.Typing_Gamepad.EastButtonMenu.canceled += ctx => menu.closeMenu((int)AxisButtons.East);
 
-        typeControls.Typing_Gamepad.SouthButtonMenu.started += ctx => menu.openMenu(true, (int)AxisButtons.South);
-        typeControls.Typing_Gamepad.SouthButtonMenu.canceled += ctx => menu.openMenu(false, (int)AxisButtons.South);
+        typeControls.Typing_Gamepad.SouthButtonMenu.started += ctx => menu.openMenu((int)AxisButtons.South);
+        typeControls.Typing_Gamepad.SouthButtonMenu.canceled += ctx => menu.closeMenu((int)AxisButtons.South);
 
-        typeControls.Typing_Gamepad.WestButtonMenu.started += ctx => menu.openMenu(true, (int)AxisButtons.West);
-        typeControls.Typing_Gamepad.WestButtonMenu.canceled += ctx => menu.openMenu(false, (int)AxisButtons.West);
+        typeControls.Typing_Gamepad.WestButtonMenu.started += ctx => menu.openMenu((int)AxisButtons.West);
+        typeControls.Typing_Gamepad.WestButtonMenu.canceled += ctx => menu.closeMenu((int)AxisButtons.West);
     }
 
     void TestInput()
