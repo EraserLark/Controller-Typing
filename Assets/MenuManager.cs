@@ -51,6 +51,8 @@ public class MenuManager : MonoBehaviour
         {
             typingMenu.SetActive(false);
         }
+
+        selectCoords = Vector2.zero;
     }
 
     public void navigateMenu(Vector2 move)

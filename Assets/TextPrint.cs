@@ -12,6 +12,6 @@ public class TextPrint : MonoBehaviour
 
     public void PrintMessage(string message)
     {
-        textArea.text = textArea.text.Insert(0, "\n>>" + message);
+        textArea.text = textArea.text.Insert(0, "\n>> " + message);
     }
 }
