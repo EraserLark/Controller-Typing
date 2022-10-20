@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class ControllerSwitch : MonoBehaviour
 {
@@ -19,9 +20,12 @@ public class ControllerSwitch : MonoBehaviour
     public Sprite sprKeyboard;
     public Sprite sprGamepad;
 
+    TextMeshProUGUI submitPrompt;
+
     private void Awake()
     {
         inputManager = GameObject.Find("InputManager").GetComponent<InputManager>();
+        submitPrompt = GameObject.Find("Preface").GetComponent<TextMeshProUGUI>();
 
         buttonBG = gameObject.GetComponent<Image>();
         buttonBG.color = Color.blue;
@@ -36,6 +40,7 @@ public class ControllerSwitch : MonoBehaviour
         usingGamepad = !usingGamepad;
         inputManager.switchToGamepad(usingGamepad);
         gamepadUIText.SetActive(usingGamepad);
+        switchPromptText(usingGamepad);
 
         int intState = Convert.ToInt32(usingGamepad);
         currentController = (Controllers)intState;
@@ -56,6 +61,22 @@ public class ControllerSwitch : MonoBehaviour
             buttonIcon.sprite = sprGamepad;
             buttonText.text = "Gamepad";
         }
+    }
+
+    void switchPromptText(bool isUsingGamepad)
+    {
+        submitPrompt.text = "You have typed:\n\nPress ";
+
+        if (isUsingGamepad)
+        {
+            submitPrompt.text += "+";
+        }
+        else if(!isUsingGamepad)
+        {
+            submitPrompt.text += "Enter";
+        }
+
+        submitPrompt.text += "\nto Submit";
     }
 
     public void updateGamepadName(string name)
