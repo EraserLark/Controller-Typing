@@ -8,7 +8,7 @@ public class LetterData : MonoBehaviour
     LetterGroup a2z = new LetterGroup("A to Z", "ABCD EFGH", "IJKL MNOP", "QRST UVWX", "YZ.! ?,+-");
     LetterGroup qwerty = new LetterGroup("QWERTY", "QWER TYUI", "OPAS DFGH", "JKL; ZXCV", "BNM, .?!-");
     LetterGroup useRanking = new LetterGroup("Use Ranking","ETAO INSH", "RDLC UMWF", "GYPB VKJX", "QZ.! ?,+-");
-    LetterGroup halloween = new LetterGroup("Spooky Season", "PUMP KINS", "SKEL ETON", "COST UMES", "BOOO OOOO");
+    LetterGroup holiday = new LetterGroup("Happy Holidays", "PRES ENTS", "SNOW FALL", "REIN DEER", "HANU KKAH");
 
     private void Awake()
     {
@@ -16,7 +16,7 @@ public class LetterData : MonoBehaviour
         presets.Add(a2z);
         presets.Add(qwerty);
         presets.Add(useRanking);
-        presets.Add(halloween);
+        presets.Add(holiday);
     }
 }
 

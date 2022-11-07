@@ -8,13 +8,13 @@ public class LayoutDropMenu : MonoBehaviour
     LetterData letterData;
     Dropdown dropdownMenu;
     MenuManager menuManager;
-    Image halloweenBG;
+    Image holidayBG;
 
     private void Awake()
     {
         letterData = GameObject.Find("LetterData").GetComponent<LetterData>();
         menuManager = GameObject.Find("MenuManager").GetComponent<MenuManager>();
-        halloweenBG = GameObject.Find("BG_Halloween").GetComponent<Image>();
+        holidayBG = GameObject.Find("BG_Christmas").GetComponent<Image>();
         dropdownMenu = gameObject.GetComponent<Dropdown>();
 
         //Runs when user chooses new option from dopdown
@@ -23,7 +23,7 @@ public class LayoutDropMenu : MonoBehaviour
 
     private void Start()
     {
-        halloweenBG.gameObject.SetActive(false);
+        holidayBG.gameObject.SetActive(false);
 
         dropdownMenu.ClearOptions();
 
@@ -39,18 +39,18 @@ public class LayoutDropMenu : MonoBehaviour
     public void changePreset(Dropdown menu)
     {
         menuManager.setMenuPreset(letterData.presets, menu.value);
-        changeHalloweenBG(menu.value);
+        changeHolidayBG(menu.value);
     }
 
-    void changeHalloweenBG(int value)
+    void changeHolidayBG(int value)
     {
         if(value == 3)
         {
-            halloweenBG.gameObject.SetActive(true);
+            holidayBG.gameObject.SetActive(true);
         }
         else
         {
-            halloweenBG.gameObject.SetActive(false);
+            holidayBG.gameObject.SetActive(false);
         }
     }
 }

@@ -5,6 +5,7 @@ public class ScreenKeys : MonoBehaviour
 {
     GameObject[,] keyBoxes = new GameObject[3,3];
     public Text[] keyLetters = new Text[9];
+    CheatSheet cheatSheet;
 
     private void Awake()
     {
@@ -19,6 +20,39 @@ public class ScreenKeys : MonoBehaviour
                 i++;
                 //print("Obj:" + transform.GetChild(i).gameObject + " Row:" + row + " Col:" + col);
             }
+        }
+    }
+
+    private void OnEnable()
+    {
+        cheatSheet = GameObject.Find("CheatSheet").GetComponent<CheatSheet>();
+        if (cheatSheet.cheatIsOpen == true)
+        {
+            CheatResizeKeys(true);
+        }
+        else if (cheatSheet.cheatIsOpen == false)
+        {
+            CheatResizeKeys(false);
+        }
+    }
+
+    public void CheatResizeKeys(bool state)
+    {
+        RectTransform keysRect = GetComponent<RectTransform>();
+
+        if(state)
+        {
+            keysRect.localScale = new Vector3(0.75f, 0.75f, 1f);
+            keysRect.anchoredPosition = new Vector2(500f, -325f);
+            //keysRect.offsetMin = new Vector2(keysRect.offsetMin.x, 350f);
+            //keysRect.offsetMax = new Vector2(keysRect.offsetMax.x, 0f);
+        }
+        else if(!state)
+        {
+            keysRect.localScale = new Vector3(1f, 1f, 1f);
+            keysRect.anchoredPosition = new Vector2(500f, -377.5f);
+            //keysRect.offsetMin = new Vector2(keysRect.offsetMin.x, 325f);
+            //keysRect.offsetMax = new Vector2(keysRect.offsetMax.x, 0f);
         }
     }
 
