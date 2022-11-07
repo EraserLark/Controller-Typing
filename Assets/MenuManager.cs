@@ -9,6 +9,7 @@ public class MenuManager : MonoBehaviour
     ScreenKeys screenKeys;
     BasicTextbox basicTextbox;
     LetterData letterData;
+    CheatSheet cheatSheet;
 
     InputManager inputMan = new InputManager();
     Vector2 selectCoords = Vector2.one;
@@ -23,6 +24,7 @@ public class MenuManager : MonoBehaviour
         screenKeys = GameObject.Find("ScreenKeys").GetComponent<ScreenKeys>();
         basicTextbox = GameObject.Find("BasicTextbox").GetComponent<BasicTextbox>();
         letterData = GameObject.Find("LetterData").GetComponent<LetterData>();
+        cheatSheet = GameObject.Find("CheatSheet").GetComponent<CheatSheet>();
     }
 
     private void Start()   //Lets vars initialize before menu is set inactive
@@ -35,6 +37,7 @@ public class MenuManager : MonoBehaviour
     public void setMenuPreset(List<LetterGroup> presets, int presetNum)
     {
         currentAxisGroup = presets[presetNum];
+        cheatSheet.UpdatePresetGroups(currentAxisGroup);
     }
 
     public void openMenu(int num)
