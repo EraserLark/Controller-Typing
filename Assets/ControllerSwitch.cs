@@ -7,11 +7,12 @@ using TMPro;
 
 public class ControllerSwitch : MonoBehaviour
 {
-    bool usingGamepad = false;
+    public bool usingGamepad = false;
     enum Controllers {Keyboard, Gamepad};
     Controllers currentController = Controllers.Keyboard;
 
     InputManager inputManager;
+    CheatSheet cheatSheet;
 
     Image buttonBG;
     Image buttonIcon;
@@ -26,6 +27,7 @@ public class ControllerSwitch : MonoBehaviour
     {
         inputManager = GameObject.Find("InputManager").GetComponent<InputManager>();
         submitPrompt = GameObject.Find("Preface").GetComponent<TextMeshProUGUI>();
+        cheatSheet = GameObject.Find("CheatSheet").GetComponent<CheatSheet>();
 
         buttonBG = gameObject.GetComponent<Image>();
         buttonBG.color = Color.blue;
@@ -41,6 +43,11 @@ public class ControllerSwitch : MonoBehaviour
         inputManager.switchToGamepad(usingGamepad);
         gamepadUIText.SetActive(usingGamepad);
         switchPromptText(usingGamepad);
+
+        if(cheatSheet.cheatIsOpen)
+        {
+            cheatSheet.SetHintKeys(usingGamepad);
+        }
 
         int intState = Convert.ToInt32(usingGamepad);
         currentController = (Controllers)intState;

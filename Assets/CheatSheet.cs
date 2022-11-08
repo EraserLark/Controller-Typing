@@ -7,21 +7,23 @@ public class CheatSheet : MonoBehaviour
 {
     Toggle cheatToggle;
     Image bg;
-    GameObject[] cheatKeys = new GameObject[4];
+    GameObject[] cheatKeys = new GameObject[5];
     public bool cheatIsOpen = false;
 
     ScreenKeys screenKeys;
     GameObject textPanel;
+    ControllerSwitch controllerSwitch;
 
     private void Awake()
     {
         screenKeys = GameObject.Find("Canvas").transform.GetChild(2).GetComponentInChildren<ScreenKeys>();
         textPanel = GameObject.Find("TextboxPanel");
+        controllerSwitch = GameObject.Find("ControllerSwitch").GetComponent<ControllerSwitch>();
         bg = GetComponent<Image>();
 
         bg.enabled = false;
 
-        for(int i = 0; i <= 3; i++)
+        for(int i = 0; i <= 4; i++)
         {
             cheatKeys[i] = transform.GetChild(i).gameObject;
             cheatKeys[i].SetActive(false);
@@ -39,15 +41,33 @@ public class CheatSheet : MonoBehaviour
         print(state);
 
         bg.enabled = state;
-        for (int i = 0; i <= 3; i++)
+        for (int i = 0; i <= 4; i++)
         {
             cheatKeys[i].SetActive(state);
         }
+
+        SetHintKeys(controllerSwitch.usingGamepad);
 
         if (screenKeys != null)
         {
             screenKeys.CheatResizeKeys(state);
             ResizeTextbox(state);
+        }
+    }
+
+    public void SetHintKeys(bool usingGamepad)
+    {
+        Transform keyHints = transform.Find("KeyHints");
+
+        if(usingGamepad)    //Gamepad hint keys
+        {
+            keyHints.GetChild(0).gameObject.SetActive(false);
+            keyHints.GetChild(1).gameObject.SetActive(true);
+        }
+        else if(!usingGamepad)  //Keyboard hint keys
+        {
+            keyHints.GetChild(1).gameObject.SetActive(false);
+            keyHints.GetChild(0).gameObject.SetActive(true);
         }
     }
 
