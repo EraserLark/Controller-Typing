@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
 public class MenuManager : MonoBehaviour
@@ -10,6 +11,7 @@ public class MenuManager : MonoBehaviour
     BasicTextbox basicTextbox;
     LetterData letterData;
     CheatSheet cheatSheet;
+    Toggle fastToggle;
 
     InputManager inputMan = new InputManager();
     Vector2 selectCoords = Vector2.one;
@@ -25,12 +27,15 @@ public class MenuManager : MonoBehaviour
         basicTextbox = GameObject.Find("BasicTextbox").GetComponent<BasicTextbox>();
         letterData = GameObject.Find("LetterData").GetComponent<LetterData>();
         cheatSheet = GameObject.Find("CheatSheet").GetComponent<CheatSheet>();
+        fastToggle = GameObject.Find("FastToggle").GetComponent<Toggle>();
     }
 
     private void Start()   //Lets vars initialize before menu is set inactive
     {
+        selectCoords = Vector2.one;
         currentAxisGroup = letterData.presets[0];
         currentGroup = currentAxisGroup.axisGroup[0];
+        cheatSheet.UpdatePresetGroups(currentAxisGroup);
         closeMenu(0);
     }
 
@@ -60,8 +65,17 @@ public class MenuManager : MonoBehaviour
 
     public void navigateMenu(Vector2 move)
     {
-        selectCoords = QuantizeAxis(move);
-        screenKeys.highlightKey(selectCoords);
+        if(fastToggle.isOn)
+        {
+            selectCoords = QuantizeAxis(move);
+            screenKeys.highlightKey(selectCoords);
+            SelectLetter();
+        }
+        else
+        {
+            selectCoords = QuantizeAxis(move);
+            screenKeys.highlightKey(selectCoords);
+        }
     }
 
     public void SelectLetter()
@@ -71,7 +85,7 @@ public class MenuManager : MonoBehaviour
             int charToPrint = (int)((selectCoords.x * 3) + selectCoords.y); //Format for 1D array
             basicTextbox.addLetter(currentGroup[charToPrint]);
         }
-        else    //Allows spaces even when menu is closed
+        else if(!fastToggle.isOn)    //Allows spaces even when menu is closed
         {
             basicTextbox.addLetter(' ');
         }

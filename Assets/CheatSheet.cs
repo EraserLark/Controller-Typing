@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class CheatSheet : MonoBehaviour
 {
-    Toggle toggle;
+    Toggle cheatToggle;
     Image bg;
     GameObject[] cheatKeys = new GameObject[4];
     public bool cheatIsOpen = false;
@@ -13,7 +13,7 @@ public class CheatSheet : MonoBehaviour
     ScreenKeys screenKeys;
     GameObject textPanel;
 
-    private void Start()
+    private void Awake()
     {
         screenKeys = GameObject.Find("Canvas").transform.GetChild(2).GetComponentInChildren<ScreenKeys>();
         textPanel = GameObject.Find("TextboxPanel");
@@ -27,8 +27,8 @@ public class CheatSheet : MonoBehaviour
             cheatKeys[i].SetActive(false);
         }
 
-        toggle = GameObject.Find("Toggle").GetComponent<Toggle>();
-        toggle.onValueChanged.AddListener(delegate { OpenCheatSheet(toggle); });
+        cheatToggle = GameObject.Find("CheatToggle").GetComponent<Toggle>();
+        cheatToggle.onValueChanged.AddListener(delegate { OpenCheatSheet(cheatToggle); });
     }
 
     public void OpenCheatSheet(Toggle toggle)
@@ -44,7 +44,6 @@ public class CheatSheet : MonoBehaviour
             cheatKeys[i].SetActive(state);
         }
 
-        //screenKeys = GameObject.Find("ScreenKeys").GetComponent<ScreenKeys>();
         if (screenKeys != null)
         {
             screenKeys.CheatResizeKeys(state);
