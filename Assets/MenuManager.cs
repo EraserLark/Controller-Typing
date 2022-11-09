@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using System.Collections;
 
 public class MenuManager : MonoBehaviour
 {
@@ -19,6 +20,9 @@ public class MenuManager : MonoBehaviour
     //Axis Letters
     LetterGroup currentAxisGroup;
     string currentGroup;
+
+    bool firstCondition = false;
+    bool secondCondition = false;
 
     private void Awake()
     {
@@ -67,15 +71,47 @@ public class MenuManager : MonoBehaviour
     {
         if(fastToggle.isOn)
         {
-            selectCoords = QuantizeAxis(move);
-            screenKeys.highlightKey(selectCoords);
-            SelectLetter();
+            FastNav(move);
         }
         else
         {
-            selectCoords = QuantizeAxis(move);
-            screenKeys.highlightKey(selectCoords);
+            StandardNav(move);
         }
+    }
+
+    void FastNav(Vector2 direction)
+    {
+        Vector2 quantizedDir = QuantizeAxis(direction);
+        if(quantizedDir != selectCoords)
+        {
+            firstCondition = !firstCondition;
+        }
+        else if(firstCondition && quantizedDir == selectCoords)
+        {
+            FastSelectLetter();
+            firstCondition = false;
+        }
+
+        print(firstCondition);
+        /*
+        if(direction == Vector2.zero)
+        {
+            direction = QuantizeAxis(direction);
+            if(direction != selectCoords)
+            {
+                FastSelectLetter();
+            }
+        }
+        */
+
+        selectCoords = QuantizeAxis(direction);
+        screenKeys.highlightKey(selectCoords);
+    }
+
+    void StandardNav(Vector2 direction)
+    {
+        selectCoords = QuantizeAxis(direction);
+        screenKeys.highlightKey(selectCoords);
     }
 
     public void SelectLetter()
@@ -85,9 +121,18 @@ public class MenuManager : MonoBehaviour
             int charToPrint = (int)((selectCoords.x * 3) + selectCoords.y); //Format for 1D array
             basicTextbox.addLetter(currentGroup[charToPrint]);
         }
-        else if(!fastToggle.isOn)    //Allows spaces even when menu is closed
+        else //Allows spaces even when menu is closed
         {
             basicTextbox.addLetter(' ');
+        }
+    }
+
+    void FastSelectLetter()
+    {
+        if (typingMenu.activeInHierarchy)
+        {
+            int charToPrint = (int)((selectCoords.x * 3) + selectCoords.y); //Format for 1D array
+            basicTextbox.addLetter(currentGroup[charToPrint]);
         }
     }
 
@@ -118,5 +163,10 @@ public class MenuManager : MonoBehaviour
         input.y = (temp + 1);
 
         return input;
+    }
+
+    IEnumerator DelayInputRecieved()
+    {
+        yield return null;
     }
 }
