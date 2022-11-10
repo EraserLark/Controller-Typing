@@ -81,7 +81,10 @@ public class MenuManager : MonoBehaviour
 
     void FastNav(Vector2 direction)
     {
+        print("Direction: " + direction);
+
         Vector2 quantizedDir = QuantizeAxis(direction);
+        print("QDir: " + quantizedDir);
         if(quantizedDir != selectCoords)
         {
             firstCondition = !firstCondition;
@@ -140,21 +143,30 @@ public class MenuManager : MonoBehaviour
     //Change .35f if want the input areas on joystick to be different
     Vector2 QuantizeAxis(Vector2 input)
     {   
-        if (input.x < -0.35f)
+        if (input.x < -0.75f)
         {
             input.x = -1;
         }
-        else if (input.x > 0.35f)
+        else if (input.x > 0.75f)
         {
             input.x = 1;
         }
-        if (input.y < -0.35f)
+        else
+        {
+            input.x = 0;
+        }
+
+        if (input.y < -0.75f)
         {
             input.y = -1;
         }
-        else if (input.y > 0.35f)
+        else if (input.y > 0.75f)
         {
             input.y = 1;
+        }
+        else
+        {
+            input.y = 0;
         }
 
         //Adjust for 2D array (flip x and y, other adjustments)
