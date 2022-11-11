@@ -36,6 +36,8 @@ public class MenuManager : MonoBehaviour
 
     private void Start()   //Lets vars initialize before menu is set inactive
     {
+        debugPanel.gameObject.SetActive(false);
+
         selectCoords = Vector2.one;
         currentAxisGroup = letterData.presets[0];
         currentGroup = currentAxisGroup.axisGroup[0];
