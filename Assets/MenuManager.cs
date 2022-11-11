@@ -1,8 +1,6 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
-using UnityEngine.InputSystem;
 using System.Collections;
 
 public class MenuManager : MonoBehaviour
@@ -12,6 +10,7 @@ public class MenuManager : MonoBehaviour
     BasicTextbox basicTextbox;
     LetterData letterData;
     CheatSheet cheatSheet;
+    DebugPanel debugPanel;
     Toggle fastToggle;
 
     InputManager inputMan = new InputManager();
@@ -31,6 +30,7 @@ public class MenuManager : MonoBehaviour
         basicTextbox = GameObject.Find("BasicTextbox").GetComponent<BasicTextbox>();
         letterData = GameObject.Find("LetterData").GetComponent<LetterData>();
         cheatSheet = GameObject.Find("CheatSheet").GetComponent<CheatSheet>();
+        debugPanel = GameObject.Find("DebugPanel").GetComponent<DebugPanel>();
         fastToggle = GameObject.Find("FastToggle").GetComponent<Toggle>();
     }
 
@@ -64,11 +64,16 @@ public class MenuManager : MonoBehaviour
             typingMenu.SetActive(false);
         }
 
-        selectCoords = Vector2.zero;
+        selectCoords = Vector2.one;
     }
 
     public void navigateMenu(Vector2 move)
     {
+        if(debugPanel.isActiveAndEnabled)
+        {
+            debugPanel.UpdateInputDir(move);
+        }
+
         if(fastToggle.isOn)
         {
             FastNav(move);
@@ -81,31 +86,14 @@ public class MenuManager : MonoBehaviour
 
     void FastNav(Vector2 direction)
     {
-        print("Direction: " + direction);
-
-        Vector2 quantizedDir = QuantizeAxis(direction);
-        print("QDir: " + quantizedDir);
-        if(quantizedDir != selectCoords)
+        Vector2 qDir = QuantizeAxis(direction);
+        if(qDir == Vector2.one)
         {
-            firstCondition = !firstCondition;
-        }
-        else if(firstCondition && quantizedDir == selectCoords)
-        {
-            FastSelectLetter();
-            firstCondition = false;
-        }
-
-        print(firstCondition);
-        /*
-        if(direction == Vector2.zero)
-        {
-            direction = QuantizeAxis(direction);
-            if(direction != selectCoords)
+            if(qDir != selectCoords)
             {
                 FastSelectLetter();
             }
         }
-        */
 
         selectCoords = QuantizeAxis(direction);
         screenKeys.highlightKey(selectCoords);
@@ -142,31 +130,28 @@ public class MenuManager : MonoBehaviour
     //Will give 8 directional movement
     //Change .35f if want the input areas on joystick to be different
     Vector2 QuantizeAxis(Vector2 input)
-    {   
-        if (input.x < -0.75f)
+    {
+        float inputMag = Vector2.SqrMagnitude(input);
+
+        if(debugPanel.isActiveAndEnabled)
         {
-            input.x = -1;
-        }
-        else if (input.x > 0.75f)
-        {
-            input.x = 1;
-        }
-        else
-        {
-            input.x = 0;
+            debugPanel.UpdateVectorMag(inputMag);
         }
 
-        if (input.y < -0.75f)
+        //Rounding Input
+        if(inputMag <= 0.95f)
         {
-            input.y = -1;
+            input = Vector2.zero;
         }
-        else if (input.y > 0.75f)
+        else if (inputMag > 0.95f)
         {
-            input.y = 1;
+            input.x = Mathf.RoundToInt(input.x);
+            input.y = Mathf.RoundToInt(input.y);
         }
-        else
+
+        if (debugPanel.isActiveAndEnabled)
         {
-            input.y = 0;
+            debugPanel.UpdateRoundedInput(input);
         }
 
         //Adjust for 2D array (flip x and y, other adjustments)
@@ -174,11 +159,11 @@ public class MenuManager : MonoBehaviour
         input.x = (input.y * -1) + 1;
         input.y = (temp + 1);
 
-        return input;
-    }
+        if (debugPanel.isActiveAndEnabled)
+        {
+            debugPanel.UpdateQuantizedInput(input);
+        }
 
-    IEnumerator DelayInputRecieved()
-    {
-        yield return null;
+        return input;
     }
 }

@@ -1,18 +1,38 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class DebugPanel : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    Text inputDir;
+    Text inputMag;
+    Text roundInput;
+    Text qDir;
+
+    private void Awake()
     {
-        
+        inputDir = transform.GetChild(1).GetComponent<Text>();
+        inputMag = transform.GetChild(2).GetComponent<Text>();
+        roundInput = transform.GetChild(3).GetComponent<Text>();
+        qDir = transform.GetChild(4).GetComponent<Text>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void UpdateInputDir(Vector2 direction)
     {
-        
+        inputDir.text = "Input Direction: " + direction;
+    }
+
+    public void UpdateVectorMag(float vecMag)
+    {
+        inputMag.text = "Input Magnitude: " + vecMag;
+    }
+
+    public void UpdateRoundedInput(Vector2 roundedInput)
+    {
+        roundInput.text = "Rounded Input: " + roundedInput;
+    }
+
+    public void UpdateQuantizedInput(Vector2 qInput)
+    {
+        qDir.text = "Quantized Direction: " + qInput;
     }
 }
