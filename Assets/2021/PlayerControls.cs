@@ -6,10 +6,10 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
-public class @PlayerControls : IInputActionCollection, IDisposable
+public class PlayerControls : IInputActionCollection, IDisposable
 {
     public InputActionAsset asset { get; }
-    public @PlayerControls()
+    public PlayerControls()
     {
         asset = InputActionAsset.FromJson(@"{
     ""name"": ""PlayerControls"",
@@ -553,11 +553,11 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_Gameplay_Rotate;
     public struct GameplayActions
     {
-        private @PlayerControls m_Wrapper;
-        public GameplayActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Grow => m_Wrapper.m_Gameplay_Grow;
-        public InputAction @Move => m_Wrapper.m_Gameplay_Move;
-        public InputAction @Rotate => m_Wrapper.m_Gameplay_Rotate;
+        private PlayerControls m_Wrapper;
+        public GameplayActions(PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction Grow => m_Wrapper.m_Gameplay_Grow;
+        public InputAction Move => m_Wrapper.m_Gameplay_Move;
+        public InputAction Rotate => m_Wrapper.m_Gameplay_Rotate;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -567,32 +567,32 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         {
             if (m_Wrapper.m_GameplayActionsCallbackInterface != null)
             {
-                @Grow.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnGrow;
-                @Grow.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnGrow;
-                @Grow.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnGrow;
-                @Move.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMove;
-                @Move.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMove;
-                @Move.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMove;
-                @Rotate.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRotate;
-                @Rotate.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRotate;
-                @Rotate.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRotate;
+                Grow.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnGrow;
+                Grow.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnGrow;
+                Grow.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnGrow;
+                Move.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMove;
+                Move.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMove;
+                Move.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMove;
+                Rotate.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRotate;
+                Rotate.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRotate;
+                Rotate.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRotate;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @Grow.started += instance.OnGrow;
-                @Grow.performed += instance.OnGrow;
-                @Grow.canceled += instance.OnGrow;
-                @Move.started += instance.OnMove;
-                @Move.performed += instance.OnMove;
-                @Move.canceled += instance.OnMove;
-                @Rotate.started += instance.OnRotate;
-                @Rotate.performed += instance.OnRotate;
-                @Rotate.canceled += instance.OnRotate;
+                Grow.started += instance.OnGrow;
+                Grow.performed += instance.OnGrow;
+                Grow.canceled += instance.OnGrow;
+                Move.started += instance.OnMove;
+                Move.performed += instance.OnMove;
+                Move.canceled += instance.OnMove;
+                Rotate.started += instance.OnRotate;
+                Rotate.performed += instance.OnRotate;
+                Rotate.canceled += instance.OnRotate;
             }
         }
     }
-    public GameplayActions @Gameplay => new GameplayActions(this);
+    public GameplayActions Gameplay => new GameplayActions(this);
 
     // Typing_Gamepad
     private readonly InputActionMap m_Typing_Gamepad;
@@ -607,16 +607,16 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_Typing_Gamepad_Submit;
     public struct Typing_GamepadActions
     {
-        private @PlayerControls m_Wrapper;
-        public Typing_GamepadActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Move => m_Wrapper.m_Typing_Gamepad_Move;
-        public InputAction @Confirm => m_Wrapper.m_Typing_Gamepad_Confirm;
-        public InputAction @Backspace => m_Wrapper.m_Typing_Gamepad_Backspace;
-        public InputAction @EastButtonMenu => m_Wrapper.m_Typing_Gamepad_EastButtonMenu;
-        public InputAction @NorthButtonMenu => m_Wrapper.m_Typing_Gamepad_NorthButtonMenu;
-        public InputAction @SouthButtonMenu => m_Wrapper.m_Typing_Gamepad_SouthButtonMenu;
-        public InputAction @WestButtonMenu => m_Wrapper.m_Typing_Gamepad_WestButtonMenu;
-        public InputAction @Submit => m_Wrapper.m_Typing_Gamepad_Submit;
+        private PlayerControls m_Wrapper;
+        public Typing_GamepadActions(PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction Move => m_Wrapper.m_Typing_Gamepad_Move;
+        public InputAction Confirm => m_Wrapper.m_Typing_Gamepad_Confirm;
+        public InputAction Backspace => m_Wrapper.m_Typing_Gamepad_Backspace;
+        public InputAction EastButtonMenu => m_Wrapper.m_Typing_Gamepad_EastButtonMenu;
+        public InputAction NorthButtonMenu => m_Wrapper.m_Typing_Gamepad_NorthButtonMenu;
+        public InputAction SouthButtonMenu => m_Wrapper.m_Typing_Gamepad_SouthButtonMenu;
+        public InputAction WestButtonMenu => m_Wrapper.m_Typing_Gamepad_WestButtonMenu;
+        public InputAction Submit => m_Wrapper.m_Typing_Gamepad_Submit;
         public InputActionMap Get() { return m_Wrapper.m_Typing_Gamepad; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -626,62 +626,62 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         {
             if (m_Wrapper.m_Typing_GamepadActionsCallbackInterface != null)
             {
-                @Move.started -= m_Wrapper.m_Typing_GamepadActionsCallbackInterface.OnMove;
-                @Move.performed -= m_Wrapper.m_Typing_GamepadActionsCallbackInterface.OnMove;
-                @Move.canceled -= m_Wrapper.m_Typing_GamepadActionsCallbackInterface.OnMove;
-                @Confirm.started -= m_Wrapper.m_Typing_GamepadActionsCallbackInterface.OnConfirm;
-                @Confirm.performed -= m_Wrapper.m_Typing_GamepadActionsCallbackInterface.OnConfirm;
-                @Confirm.canceled -= m_Wrapper.m_Typing_GamepadActionsCallbackInterface.OnConfirm;
-                @Backspace.started -= m_Wrapper.m_Typing_GamepadActionsCallbackInterface.OnBackspace;
-                @Backspace.performed -= m_Wrapper.m_Typing_GamepadActionsCallbackInterface.OnBackspace;
-                @Backspace.canceled -= m_Wrapper.m_Typing_GamepadActionsCallbackInterface.OnBackspace;
-                @EastButtonMenu.started -= m_Wrapper.m_Typing_GamepadActionsCallbackInterface.OnEastButtonMenu;
-                @EastButtonMenu.performed -= m_Wrapper.m_Typing_GamepadActionsCallbackInterface.OnEastButtonMenu;
-                @EastButtonMenu.canceled -= m_Wrapper.m_Typing_GamepadActionsCallbackInterface.OnEastButtonMenu;
-                @NorthButtonMenu.started -= m_Wrapper.m_Typing_GamepadActionsCallbackInterface.OnNorthButtonMenu;
-                @NorthButtonMenu.performed -= m_Wrapper.m_Typing_GamepadActionsCallbackInterface.OnNorthButtonMenu;
-                @NorthButtonMenu.canceled -= m_Wrapper.m_Typing_GamepadActionsCallbackInterface.OnNorthButtonMenu;
-                @SouthButtonMenu.started -= m_Wrapper.m_Typing_GamepadActionsCallbackInterface.OnSouthButtonMenu;
-                @SouthButtonMenu.performed -= m_Wrapper.m_Typing_GamepadActionsCallbackInterface.OnSouthButtonMenu;
-                @SouthButtonMenu.canceled -= m_Wrapper.m_Typing_GamepadActionsCallbackInterface.OnSouthButtonMenu;
-                @WestButtonMenu.started -= m_Wrapper.m_Typing_GamepadActionsCallbackInterface.OnWestButtonMenu;
-                @WestButtonMenu.performed -= m_Wrapper.m_Typing_GamepadActionsCallbackInterface.OnWestButtonMenu;
-                @WestButtonMenu.canceled -= m_Wrapper.m_Typing_GamepadActionsCallbackInterface.OnWestButtonMenu;
-                @Submit.started -= m_Wrapper.m_Typing_GamepadActionsCallbackInterface.OnSubmit;
-                @Submit.performed -= m_Wrapper.m_Typing_GamepadActionsCallbackInterface.OnSubmit;
-                @Submit.canceled -= m_Wrapper.m_Typing_GamepadActionsCallbackInterface.OnSubmit;
+                Move.started -= m_Wrapper.m_Typing_GamepadActionsCallbackInterface.OnMove;
+                Move.performed -= m_Wrapper.m_Typing_GamepadActionsCallbackInterface.OnMove;
+                Move.canceled -= m_Wrapper.m_Typing_GamepadActionsCallbackInterface.OnMove;
+                Confirm.started -= m_Wrapper.m_Typing_GamepadActionsCallbackInterface.OnConfirm;
+                Confirm.performed -= m_Wrapper.m_Typing_GamepadActionsCallbackInterface.OnConfirm;
+                Confirm.canceled -= m_Wrapper.m_Typing_GamepadActionsCallbackInterface.OnConfirm;
+                Backspace.started -= m_Wrapper.m_Typing_GamepadActionsCallbackInterface.OnBackspace;
+                Backspace.performed -= m_Wrapper.m_Typing_GamepadActionsCallbackInterface.OnBackspace;
+                Backspace.canceled -= m_Wrapper.m_Typing_GamepadActionsCallbackInterface.OnBackspace;
+                EastButtonMenu.started -= m_Wrapper.m_Typing_GamepadActionsCallbackInterface.OnEastButtonMenu;
+                EastButtonMenu.performed -= m_Wrapper.m_Typing_GamepadActionsCallbackInterface.OnEastButtonMenu;
+                EastButtonMenu.canceled -= m_Wrapper.m_Typing_GamepadActionsCallbackInterface.OnEastButtonMenu;
+                NorthButtonMenu.started -= m_Wrapper.m_Typing_GamepadActionsCallbackInterface.OnNorthButtonMenu;
+                NorthButtonMenu.performed -= m_Wrapper.m_Typing_GamepadActionsCallbackInterface.OnNorthButtonMenu;
+                NorthButtonMenu.canceled -= m_Wrapper.m_Typing_GamepadActionsCallbackInterface.OnNorthButtonMenu;
+                SouthButtonMenu.started -= m_Wrapper.m_Typing_GamepadActionsCallbackInterface.OnSouthButtonMenu;
+                SouthButtonMenu.performed -= m_Wrapper.m_Typing_GamepadActionsCallbackInterface.OnSouthButtonMenu;
+                SouthButtonMenu.canceled -= m_Wrapper.m_Typing_GamepadActionsCallbackInterface.OnSouthButtonMenu;
+                WestButtonMenu.started -= m_Wrapper.m_Typing_GamepadActionsCallbackInterface.OnWestButtonMenu;
+                WestButtonMenu.performed -= m_Wrapper.m_Typing_GamepadActionsCallbackInterface.OnWestButtonMenu;
+                WestButtonMenu.canceled -= m_Wrapper.m_Typing_GamepadActionsCallbackInterface.OnWestButtonMenu;
+                Submit.started -= m_Wrapper.m_Typing_GamepadActionsCallbackInterface.OnSubmit;
+                Submit.performed -= m_Wrapper.m_Typing_GamepadActionsCallbackInterface.OnSubmit;
+                Submit.canceled -= m_Wrapper.m_Typing_GamepadActionsCallbackInterface.OnSubmit;
             }
             m_Wrapper.m_Typing_GamepadActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @Move.started += instance.OnMove;
-                @Move.performed += instance.OnMove;
-                @Move.canceled += instance.OnMove;
-                @Confirm.started += instance.OnConfirm;
-                @Confirm.performed += instance.OnConfirm;
-                @Confirm.canceled += instance.OnConfirm;
-                @Backspace.started += instance.OnBackspace;
-                @Backspace.performed += instance.OnBackspace;
-                @Backspace.canceled += instance.OnBackspace;
-                @EastButtonMenu.started += instance.OnEastButtonMenu;
-                @EastButtonMenu.performed += instance.OnEastButtonMenu;
-                @EastButtonMenu.canceled += instance.OnEastButtonMenu;
-                @NorthButtonMenu.started += instance.OnNorthButtonMenu;
-                @NorthButtonMenu.performed += instance.OnNorthButtonMenu;
-                @NorthButtonMenu.canceled += instance.OnNorthButtonMenu;
-                @SouthButtonMenu.started += instance.OnSouthButtonMenu;
-                @SouthButtonMenu.performed += instance.OnSouthButtonMenu;
-                @SouthButtonMenu.canceled += instance.OnSouthButtonMenu;
-                @WestButtonMenu.started += instance.OnWestButtonMenu;
-                @WestButtonMenu.performed += instance.OnWestButtonMenu;
-                @WestButtonMenu.canceled += instance.OnWestButtonMenu;
-                @Submit.started += instance.OnSubmit;
-                @Submit.performed += instance.OnSubmit;
-                @Submit.canceled += instance.OnSubmit;
+                Move.started += instance.OnMove;
+                Move.performed += instance.OnMove;
+                Move.canceled += instance.OnMove;
+                Confirm.started += instance.OnConfirm;
+                Confirm.performed += instance.OnConfirm;
+                Confirm.canceled += instance.OnConfirm;
+                Backspace.started += instance.OnBackspace;
+                Backspace.performed += instance.OnBackspace;
+                Backspace.canceled += instance.OnBackspace;
+                EastButtonMenu.started += instance.OnEastButtonMenu;
+                EastButtonMenu.performed += instance.OnEastButtonMenu;
+                EastButtonMenu.canceled += instance.OnEastButtonMenu;
+                NorthButtonMenu.started += instance.OnNorthButtonMenu;
+                NorthButtonMenu.performed += instance.OnNorthButtonMenu;
+                NorthButtonMenu.canceled += instance.OnNorthButtonMenu;
+                SouthButtonMenu.started += instance.OnSouthButtonMenu;
+                SouthButtonMenu.performed += instance.OnSouthButtonMenu;
+                SouthButtonMenu.canceled += instance.OnSouthButtonMenu;
+                WestButtonMenu.started += instance.OnWestButtonMenu;
+                WestButtonMenu.performed += instance.OnWestButtonMenu;
+                WestButtonMenu.canceled += instance.OnWestButtonMenu;
+                Submit.started += instance.OnSubmit;
+                Submit.performed += instance.OnSubmit;
+                Submit.canceled += instance.OnSubmit;
             }
         }
     }
-    public Typing_GamepadActions @Typing_Gamepad => new Typing_GamepadActions(this);
+    public Typing_GamepadActions Typing_Gamepad => new Typing_GamepadActions(this);
 
     // Typing_Keyboard
     private readonly InputActionMap m_Typing_Keyboard;
@@ -696,16 +696,16 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_Typing_Keyboard_Submit;
     public struct Typing_KeyboardActions
     {
-        private @PlayerControls m_Wrapper;
-        public Typing_KeyboardActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Move => m_Wrapper.m_Typing_Keyboard_Move;
-        public InputAction @Confirm => m_Wrapper.m_Typing_Keyboard_Confirm;
-        public InputAction @Backspace => m_Wrapper.m_Typing_Keyboard_Backspace;
-        public InputAction @EastButtonMenu => m_Wrapper.m_Typing_Keyboard_EastButtonMenu;
-        public InputAction @NorthButtonMenu => m_Wrapper.m_Typing_Keyboard_NorthButtonMenu;
-        public InputAction @SouthButtonMenu => m_Wrapper.m_Typing_Keyboard_SouthButtonMenu;
-        public InputAction @WestButtonMenu => m_Wrapper.m_Typing_Keyboard_WestButtonMenu;
-        public InputAction @Submit => m_Wrapper.m_Typing_Keyboard_Submit;
+        private PlayerControls m_Wrapper;
+        public Typing_KeyboardActions(PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction Move => m_Wrapper.m_Typing_Keyboard_Move;
+        public InputAction Confirm => m_Wrapper.m_Typing_Keyboard_Confirm;
+        public InputAction Backspace => m_Wrapper.m_Typing_Keyboard_Backspace;
+        public InputAction EastButtonMenu => m_Wrapper.m_Typing_Keyboard_EastButtonMenu;
+        public InputAction NorthButtonMenu => m_Wrapper.m_Typing_Keyboard_NorthButtonMenu;
+        public InputAction SouthButtonMenu => m_Wrapper.m_Typing_Keyboard_SouthButtonMenu;
+        public InputAction WestButtonMenu => m_Wrapper.m_Typing_Keyboard_WestButtonMenu;
+        public InputAction Submit => m_Wrapper.m_Typing_Keyboard_Submit;
         public InputActionMap Get() { return m_Wrapper.m_Typing_Keyboard; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -715,62 +715,62 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         {
             if (m_Wrapper.m_Typing_KeyboardActionsCallbackInterface != null)
             {
-                @Move.started -= m_Wrapper.m_Typing_KeyboardActionsCallbackInterface.OnMove;
-                @Move.performed -= m_Wrapper.m_Typing_KeyboardActionsCallbackInterface.OnMove;
-                @Move.canceled -= m_Wrapper.m_Typing_KeyboardActionsCallbackInterface.OnMove;
-                @Confirm.started -= m_Wrapper.m_Typing_KeyboardActionsCallbackInterface.OnConfirm;
-                @Confirm.performed -= m_Wrapper.m_Typing_KeyboardActionsCallbackInterface.OnConfirm;
-                @Confirm.canceled -= m_Wrapper.m_Typing_KeyboardActionsCallbackInterface.OnConfirm;
-                @Backspace.started -= m_Wrapper.m_Typing_KeyboardActionsCallbackInterface.OnBackspace;
-                @Backspace.performed -= m_Wrapper.m_Typing_KeyboardActionsCallbackInterface.OnBackspace;
-                @Backspace.canceled -= m_Wrapper.m_Typing_KeyboardActionsCallbackInterface.OnBackspace;
-                @EastButtonMenu.started -= m_Wrapper.m_Typing_KeyboardActionsCallbackInterface.OnEastButtonMenu;
-                @EastButtonMenu.performed -= m_Wrapper.m_Typing_KeyboardActionsCallbackInterface.OnEastButtonMenu;
-                @EastButtonMenu.canceled -= m_Wrapper.m_Typing_KeyboardActionsCallbackInterface.OnEastButtonMenu;
-                @NorthButtonMenu.started -= m_Wrapper.m_Typing_KeyboardActionsCallbackInterface.OnNorthButtonMenu;
-                @NorthButtonMenu.performed -= m_Wrapper.m_Typing_KeyboardActionsCallbackInterface.OnNorthButtonMenu;
-                @NorthButtonMenu.canceled -= m_Wrapper.m_Typing_KeyboardActionsCallbackInterface.OnNorthButtonMenu;
-                @SouthButtonMenu.started -= m_Wrapper.m_Typing_KeyboardActionsCallbackInterface.OnSouthButtonMenu;
-                @SouthButtonMenu.performed -= m_Wrapper.m_Typing_KeyboardActionsCallbackInterface.OnSouthButtonMenu;
-                @SouthButtonMenu.canceled -= m_Wrapper.m_Typing_KeyboardActionsCallbackInterface.OnSouthButtonMenu;
-                @WestButtonMenu.started -= m_Wrapper.m_Typing_KeyboardActionsCallbackInterface.OnWestButtonMenu;
-                @WestButtonMenu.performed -= m_Wrapper.m_Typing_KeyboardActionsCallbackInterface.OnWestButtonMenu;
-                @WestButtonMenu.canceled -= m_Wrapper.m_Typing_KeyboardActionsCallbackInterface.OnWestButtonMenu;
-                @Submit.started -= m_Wrapper.m_Typing_KeyboardActionsCallbackInterface.OnSubmit;
-                @Submit.performed -= m_Wrapper.m_Typing_KeyboardActionsCallbackInterface.OnSubmit;
-                @Submit.canceled -= m_Wrapper.m_Typing_KeyboardActionsCallbackInterface.OnSubmit;
+                Move.started -= m_Wrapper.m_Typing_KeyboardActionsCallbackInterface.OnMove;
+                Move.performed -= m_Wrapper.m_Typing_KeyboardActionsCallbackInterface.OnMove;
+                Move.canceled -= m_Wrapper.m_Typing_KeyboardActionsCallbackInterface.OnMove;
+                Confirm.started -= m_Wrapper.m_Typing_KeyboardActionsCallbackInterface.OnConfirm;
+                Confirm.performed -= m_Wrapper.m_Typing_KeyboardActionsCallbackInterface.OnConfirm;
+                Confirm.canceled -= m_Wrapper.m_Typing_KeyboardActionsCallbackInterface.OnConfirm;
+                Backspace.started -= m_Wrapper.m_Typing_KeyboardActionsCallbackInterface.OnBackspace;
+                Backspace.performed -= m_Wrapper.m_Typing_KeyboardActionsCallbackInterface.OnBackspace;
+                Backspace.canceled -= m_Wrapper.m_Typing_KeyboardActionsCallbackInterface.OnBackspace;
+                EastButtonMenu.started -= m_Wrapper.m_Typing_KeyboardActionsCallbackInterface.OnEastButtonMenu;
+                EastButtonMenu.performed -= m_Wrapper.m_Typing_KeyboardActionsCallbackInterface.OnEastButtonMenu;
+                EastButtonMenu.canceled -= m_Wrapper.m_Typing_KeyboardActionsCallbackInterface.OnEastButtonMenu;
+                NorthButtonMenu.started -= m_Wrapper.m_Typing_KeyboardActionsCallbackInterface.OnNorthButtonMenu;
+                NorthButtonMenu.performed -= m_Wrapper.m_Typing_KeyboardActionsCallbackInterface.OnNorthButtonMenu;
+                NorthButtonMenu.canceled -= m_Wrapper.m_Typing_KeyboardActionsCallbackInterface.OnNorthButtonMenu;
+                SouthButtonMenu.started -= m_Wrapper.m_Typing_KeyboardActionsCallbackInterface.OnSouthButtonMenu;
+                SouthButtonMenu.performed -= m_Wrapper.m_Typing_KeyboardActionsCallbackInterface.OnSouthButtonMenu;
+                SouthButtonMenu.canceled -= m_Wrapper.m_Typing_KeyboardActionsCallbackInterface.OnSouthButtonMenu;
+                WestButtonMenu.started -= m_Wrapper.m_Typing_KeyboardActionsCallbackInterface.OnWestButtonMenu;
+                WestButtonMenu.performed -= m_Wrapper.m_Typing_KeyboardActionsCallbackInterface.OnWestButtonMenu;
+                WestButtonMenu.canceled -= m_Wrapper.m_Typing_KeyboardActionsCallbackInterface.OnWestButtonMenu;
+                Submit.started -= m_Wrapper.m_Typing_KeyboardActionsCallbackInterface.OnSubmit;
+                Submit.performed -= m_Wrapper.m_Typing_KeyboardActionsCallbackInterface.OnSubmit;
+                Submit.canceled -= m_Wrapper.m_Typing_KeyboardActionsCallbackInterface.OnSubmit;
             }
             m_Wrapper.m_Typing_KeyboardActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @Move.started += instance.OnMove;
-                @Move.performed += instance.OnMove;
-                @Move.canceled += instance.OnMove;
-                @Confirm.started += instance.OnConfirm;
-                @Confirm.performed += instance.OnConfirm;
-                @Confirm.canceled += instance.OnConfirm;
-                @Backspace.started += instance.OnBackspace;
-                @Backspace.performed += instance.OnBackspace;
-                @Backspace.canceled += instance.OnBackspace;
-                @EastButtonMenu.started += instance.OnEastButtonMenu;
-                @EastButtonMenu.performed += instance.OnEastButtonMenu;
-                @EastButtonMenu.canceled += instance.OnEastButtonMenu;
-                @NorthButtonMenu.started += instance.OnNorthButtonMenu;
-                @NorthButtonMenu.performed += instance.OnNorthButtonMenu;
-                @NorthButtonMenu.canceled += instance.OnNorthButtonMenu;
-                @SouthButtonMenu.started += instance.OnSouthButtonMenu;
-                @SouthButtonMenu.performed += instance.OnSouthButtonMenu;
-                @SouthButtonMenu.canceled += instance.OnSouthButtonMenu;
-                @WestButtonMenu.started += instance.OnWestButtonMenu;
-                @WestButtonMenu.performed += instance.OnWestButtonMenu;
-                @WestButtonMenu.canceled += instance.OnWestButtonMenu;
-                @Submit.started += instance.OnSubmit;
-                @Submit.performed += instance.OnSubmit;
-                @Submit.canceled += instance.OnSubmit;
+                Move.started += instance.OnMove;
+                Move.performed += instance.OnMove;
+                Move.canceled += instance.OnMove;
+                Confirm.started += instance.OnConfirm;
+                Confirm.performed += instance.OnConfirm;
+                Confirm.canceled += instance.OnConfirm;
+                Backspace.started += instance.OnBackspace;
+                Backspace.performed += instance.OnBackspace;
+                Backspace.canceled += instance.OnBackspace;
+                EastButtonMenu.started += instance.OnEastButtonMenu;
+                EastButtonMenu.performed += instance.OnEastButtonMenu;
+                EastButtonMenu.canceled += instance.OnEastButtonMenu;
+                NorthButtonMenu.started += instance.OnNorthButtonMenu;
+                NorthButtonMenu.performed += instance.OnNorthButtonMenu;
+                NorthButtonMenu.canceled += instance.OnNorthButtonMenu;
+                SouthButtonMenu.started += instance.OnSouthButtonMenu;
+                SouthButtonMenu.performed += instance.OnSouthButtonMenu;
+                SouthButtonMenu.canceled += instance.OnSouthButtonMenu;
+                WestButtonMenu.started += instance.OnWestButtonMenu;
+                WestButtonMenu.performed += instance.OnWestButtonMenu;
+                WestButtonMenu.canceled += instance.OnWestButtonMenu;
+                Submit.started += instance.OnSubmit;
+                Submit.performed += instance.OnSubmit;
+                Submit.canceled += instance.OnSubmit;
             }
         }
     }
-    public Typing_KeyboardActions @Typing_Keyboard => new Typing_KeyboardActions(this);
+    public Typing_KeyboardActions Typing_Keyboard => new Typing_KeyboardActions(this);
     private int m_GamepadTestSchemeIndex = -1;
     public InputControlScheme GamepadTestScheme
     {
