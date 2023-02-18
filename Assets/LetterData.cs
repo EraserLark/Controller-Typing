@@ -8,7 +8,7 @@ public class LetterData : MonoBehaviour
     LetterGroup a2z = new LetterGroup("A to Z", "ABCD EFGH", "IJKL MNOP", "QRST UVWX", "YZ.! ?':)");
     LetterGroup qwerty = new LetterGroup("QWERTY", "QWER TYUI", "OPAS DFGH", "JKL; ZXCV", "BNM, .?!@");
     LetterGroup useRanking = new LetterGroup("Use Ranking","ETAO INSH", "RDLC UMWF", "GYPB VKJX", "QZ.! ?':(");
-    LetterGroup holiday = new LetterGroup("Happy Holidays", "PRES ENTS", "SNOW FALL", "REIN DEER", "NEWS OCKS");
+    LetterGroup holiday = new LetterGroup("Rabbit Season", "EGGH UNTS", "BIGB UNNY", "CAND YEGG", "RELI GION");
 
     private void Awake()
     {
